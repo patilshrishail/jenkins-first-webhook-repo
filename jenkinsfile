@@ -4,7 +4,7 @@ pipeline {
         stage("build") {
             steps {
                 echo "compiling the java source code"
-                sh 'javac hello.java'
+                sh 'javac Helloworld.java'
 
             }
         }
@@ -12,7 +12,7 @@ pipeline {
         stage('run') {
             steps {
                 echo 'Running the compiled java code'
-                sh 'java Helloworld'
+                sh 'java helloWorld'
             }
         }
     }
