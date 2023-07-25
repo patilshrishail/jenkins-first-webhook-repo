@@ -1,20 +1,16 @@
 pipeline {
     agent any
-    stages{
-        stage("build") {
+    stages {
+        stage('Build Application') {
             steps {
-                echo "compiling the java source code"
-                sh 'javac helloworld.java'
-
+                sh 'mvn -f pom.xml clean package'
             }
-        }
-
-        stage('run') {
-            steps {
-                echo 'Running the compiled java code'
-                sh 'java helloWorld'
+            post {
+                success {
+                    echo "Now Archiving the Artifacts....."
+                    archiveArtifacts artifacts: '**/*.war'
+                }
             }
         }
     }
-
 }
