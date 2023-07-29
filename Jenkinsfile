@@ -12,13 +12,25 @@ pipeline {
                 }
             }
         }
-        stage ('Deploy to Staging Enviornment') {
+        stage ('Test Application') {
             steps {
-                script {
-                    deploy adapters: [tomcat9(credentialsId: 'Tomcat-Stage-Credentials', path: '', url: 'http://3.133.140.216:8080/')], contextPath: '/', onFailure: false, war: '*/.war'
-                }
+                echo 'Testing the Application'
             }
         }
+        stage ('Nexus Deploy') {
+             steps {
+                echo 'Deploying Artifact to Nexus'
+            }
+        }
+        stage ('Deploy to stagging Enviornment') {
+            steps {
+                build job : 'Deploy-web-Application-pipeline'
+            }
+        }
+
+
+    
     }
+
     
 }
