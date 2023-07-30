@@ -27,7 +27,7 @@ pipeline {
                 build job :'Deploy-web-Application-pipeline'
             }
         }
-        stage ('Deploy to stagging Enviornment') {
+        stage ('Deploy to production Enviornment') {
             steps {
                 script {
                      deploy adapters: [tomcat9(credentialsId: 'Tomcat-Stage-Credentials', path: '', url: 'http://http://3.16.90.253:8080')], contextPath: '/', onFailure: false, war: '**/*.war'
